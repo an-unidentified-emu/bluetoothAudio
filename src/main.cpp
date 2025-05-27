@@ -9,6 +9,7 @@ BluetoothA2DPSink a2dp_sink(out);
 
 void setup() {
     a2dp_sink.set_auto_reconnect(true);
+    a2dp_sink.set_volume(100);
     a2dp_sink.start("Panasonic Stereo Music System");
     a2dp_sink.set_volume(100); // Set initial volume to 50%
     pinMode(PAUSE, INPUT_PULLUP);
@@ -33,16 +34,16 @@ void loop() {
         else a2dp_sink.pause();
         isPaused = !isPaused;
         prevPause = true;
-    }
+        }
     if (prevNext) {
         // Button was released
         if (!next) prevNext = false;
-    }
+}
     else if (next) {
         a2dp_sink.next();
         prevNext = true;
-    }
-    
+}
+
     if (prevPrevious) {
         // Button was released
         if (!previous) prevPrevious = false;
@@ -50,5 +51,5 @@ void loop() {
     else if (previous) {
         a2dp_sink.previous();
         prevPrevious = true;
-    }
+}
 }
